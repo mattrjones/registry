@@ -25,13 +25,21 @@ class GiftsController < ApplicationController
         end
     end
 
+    post '/gifts/new' do 
+        if logged_in?(session)
+            erb :'gifts/add_gift'
+        else
+            redirect to "/login"
+        end
+    end
+
     post '/gifts' do
         @gift = Gift.new(params)
         if @gift.content == ""
           redirect to "/gifts/new"
         elsif @gift.save
             @user = current_user(session)
-            @user.gift << @gift
+            @user.gifts << @gift
             redirect to "/gifts"
          else
             redirect to "/signup"

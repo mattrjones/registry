@@ -1,0 +1,20 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h2>Edit</h2>
+
+<form action="/gifts/<%=@gift.id%>" method="POST">
+<input type="hidden" id="hidden" name="_method" value="patch">
+
+    <label>Edit gift</label><br>
+    <textarea value="<%= @gift.content %>" name="content" rows="4" cols="35"></textarea><br>
+    <button id="submit" type="submit">Edit</button>
+</form>
+
+<h2>Delete</h2>
+
+<form action="/gifts/<%= @gift.id %>" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete gift">
+</form> 

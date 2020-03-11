@@ -1,0 +1,5 @@
+<h1>Gifts by <%= @user.username %></h1>
+
+<% @gifts.each do |gift| %>
+    <p><%= gift.content%></p>
+<% end %> 

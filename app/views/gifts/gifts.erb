@@ -1,0 +1,10 @@
+<h1>Welcome, <%= @user.username%></h1>
+
+<% @users.each do |user| %>
+    <% user.gifts.each do |gift| %>
+        <p>A gift added by @<%= user.username%></p>
+        <p><%= gift.id %>. <%=gift.content%></p>
+    <% end %>
+<% end %>
+
+<a href="/logout">Log Out<a/> 

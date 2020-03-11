@@ -19,7 +19,7 @@ include Helper
   get '/login' do 
     if logged_in?(session)
       current_user(session)
-      redirect to "/tweets"
+      redirect to "/gifts"
     else
       erb :'users/login'
     end
@@ -30,7 +30,7 @@ include Helper
 
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
-      redirect to "/tweets"
+      redirect to "/gifts"
     else
       redirect to "/login"
     end
@@ -38,7 +38,7 @@ include Helper
   
   get '/signup' do 
     if logged_in?(session)
-      redirect to "/tweets"
+      redirect to "/gifts"
     else 
       erb :'/users/create_user'
     end 
@@ -51,7 +51,7 @@ include Helper
       redirect to "/signup"
     elsif @user.save
       session[:id] = @user.id
-      redirect to "/tweets"
+      redirect to "/gifts"
     else
       redirect to "/signup"
     end
@@ -64,8 +64,8 @@ include Helper
     redirect to "/login"
   end	  
   
-  post '/tweets' do 
-    "Hi! These are my tweets!"
+  post '/gifts' do 
+    "Hi! These are my gifts!"
   end 
 
 end

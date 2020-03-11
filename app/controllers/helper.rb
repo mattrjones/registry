@@ -13,8 +13,8 @@ module Helper
       end
     end
   
-    def current_tweet(id)
-      Tweet.find(id)
+    def current_gift(id)
+      Gift.find(id)
     end
   
   end 

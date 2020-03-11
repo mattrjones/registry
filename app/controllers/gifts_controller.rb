@@ -1,89 +1,89 @@
 require 'sinatra/base'
 
 
-class TweetsController < ApplicationController
+class GiftsController < ApplicationController
 
  enable :sessions
  enable :method_override
 
-    get '/tweets' do
+    get '/gifts' do
         if logged_in?(session)
             @user = current_user(session)
-            @tweets = Tweet.all 
+            @gifts = Gift.all 
             @users = User.all
         else
             redirect to "/login"
         end
-        erb :'tweets/tweets'
+        erb :'gifts/gifts'
     end
 
-    get '/tweets/new' do
+    get '/gifts/new' do
         if logged_in?(session)
-            erb :'tweets/create_tweet'
+            erb :'gifts/add_gift'
         else
             redirect to "/login"
         end
     end
 
-    post '/tweets' do
-        @tweet = Tweet.new(params)
-        if @tweet.content == ""
-          redirect to "/tweets/new"
-        elsif @tweet.save
+    post '/gifts' do
+        @gift = Gift.new(params)
+        if @gift.content == ""
+          redirect to "/gifts/new"
+        elsif @gift.save
             @user = current_user(session)
-            @user.tweets << @tweet
-            redirect to "/tweets"
+            @user.gift << @gift
+            redirect to "/gifts"
          else
             redirect to "/signup"
         end
     end
     
-    get '/tweets/:id' do
+    get '/gifts/:id' do
         if logged_in?(session)
-            @tweet = current_tweet(params[:id])
-            erb :'tweets/show_tweet'
+            @gift = current_gift(params[:id])
+            erb :'gifts/show_gifts'
         else
             redirect to "/login"
         end
     end
 
-    get '/tweets/:id/edit' do
+    get '/gifts/:id/edit' do
         if logged_in?(session)
-            @tweet = current_tweet(params[:id])
-            erb :'tweets/show_tweet'
+            @gift = current_gift(params[:id])
+            erb :'gifts/show_gift'
         else
             redirect to "/login"
         end
     end
 
-    patch '/tweets/:id' do
-        @tweet = current_tweet(params[:id])
+    patch '/gifts/:id' do
+        @gift = current_gift(params[:id])
         @user = current_user(session)
-        if @tweet.user_id == @user.id
+        if @gift.user_id == @user.id
             if params["content"] != ""
-                @tweet.content = params["content"]
-                @tweet.save
-                "Successfully updated tweet."
-                redirect to "/tweets/#{@tweet.id}/edit"
+                @gift.content = params["content"]
+                @gift.save
+                "Successfully updated gift."
+                redirect to "/gifts/#{@gift.id}/edit"
             else 
-                "Your tweet can't be empty"
-                redirect to "/tweets/#{@tweet.id}/edit"
+                "Your gift can't be empty"
+                redirect to "/gifts/#{@gift.id}/edit"
             end
         else
-            "You can only edit and delete your own tweets"
-            redirect to "/tweets"
+            "You can only edit and delete your own gifts"
+            redirect to "/gifts"
         end
     end
 
-    delete '/tweets/:id' do
+    delete '/gifts/:id' do
         if logged_in?(session)
             @user = current_user(session)
-            @tweet = current_tweet(params[:id])
-            if @tweet.user_id == @user.id
-                @tweet.delete
-                redirect to '/tweets'
+            @gift = current_gift(params[:id])
+            if @gift.user_id == @user.id
+                @gift.delete
+                redirect to '/gifts'
             else
-                redirect to "/tweets"
+                redirect to "/gifts"
             end
         end
     end

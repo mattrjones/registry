@@ -10,7 +10,7 @@ class GiftsController < ApplicationController
         if logged_in?(session)
             @user = current_user(session)
             @gifts = Gift.all 
-            @users = User.all
+            @users = current_user(session)
         else
             redirect to "/login"
         end

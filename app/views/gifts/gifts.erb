@@ -2,7 +2,7 @@
 <p> Your gifts: </p>
 <% @user.gifts.each do |gift| %>
         <!--<p>A gift added by @<%= @user.username%></p>-->
-        <p><%= gift.id %>. <%=gift.content%></p>
+        <p><%=gift.content%></p>
 <% end %>
 
 <form action="/gifts/new" method="POST">

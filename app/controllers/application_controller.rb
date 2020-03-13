@@ -19,7 +19,7 @@ include Helper
   get '/login' do 
     if logged_in?(session)
       current_user(session)
-      redirect to "/gifts"
+      redirect to "/home"
     else
       erb :'users/login'
     end
@@ -30,7 +30,7 @@ include Helper
 
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
-      redirect to "/gifts"
+      redirect to "/home"
     else
       redirect to "/login"
     end
@@ -66,6 +66,10 @@ include Helper
   
   post '/gifts' do 
     "Hi! These are my gifts!"
+  end 
+
+  get '/home' do 
+    erb :home
   end 
 
 end

@@ -64,6 +64,15 @@ class GiftsController < ApplicationController
         end
     end
 
+    post '/gifts/:id/edit' do
+        if logged_in?(session)
+            @gift = current_gift(params[:id])
+            erb :'gifts/show_gift'
+        else
+            redirect to "/login"
+        end
+    end
+
     patch '/gifts/:id' do
         @gift = current_gift(params[:id])
         @user = current_user(session)

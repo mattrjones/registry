@@ -3,6 +3,9 @@
 <% @user.gifts.each do |gift| %>
         <!--<p>A gift added by @<%= @user.username%></p>-->
         <p><%=gift.content%></p>
+        <form action='/gifts/<%=gift.id%>/edit' method="POST">
+            <button id="submit" type="submit">Edit Gift</button>
+        </form> 
 <% end %>
 
 <form action="/gifts/new" method="POST">

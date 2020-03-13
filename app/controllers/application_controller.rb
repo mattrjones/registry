@@ -6,7 +6,7 @@ include Helper
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    set :session_secret, "fwitter_secret"
+    set :session_secret, "registry_secret"
   end
   
   enable :method_override

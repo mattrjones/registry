@@ -37,12 +37,11 @@ class GiftsController < ApplicationController
         @gift = Gift.new(params)
         if @gift.content == ""
           redirect to "/gifts/new"
-        elsif @gift.save
+        else
+            @gift.save
             @user = current_user(session)
             @user.gifts << @gift
             redirect to "/gifts"
-         else
-            redirect to "/signup"
         end
     end
     
@@ -81,7 +80,7 @@ class GiftsController < ApplicationController
                 @gift.content = params["content"]
                 @gift.save
                 "Successfully updated gift."
-                redirect to "/gifts/#{@gift.id}/edit"
+                redirect to "/gifts"
             else 
                 "Your gift can't be empty"
                 redirect to "/gifts/#{@gift.id}/edit"

@@ -63,6 +63,13 @@ class GiftsController < ApplicationController
         end
     end
 
+    post '/gifts/all' do 
+        @user = current_user(session)
+        @gifts = Gift.all
+        @users = User.all 
+        erb :'gifts/all_gifts'
+    end 
+
     post '/gifts/:id/edit' do
         if logged_in?(session)
             @gift = current_gift(params[:id])

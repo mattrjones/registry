@@ -1,0 +1,10 @@
+ 
+<h2> Gifts </h2>
+<% @users.each do |user| %>
+<% user.gifts.each do |gift| %>
+<div>
+    <p> A gift from <%= user.username%> </p>
+    <%= gift.content %>
+  </div>
+<% end %>
+<% end %>
